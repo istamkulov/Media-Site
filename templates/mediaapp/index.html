@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Список фильмов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">🎥 MediaSite</a>
+        <div class="d-flex">
+            <a href="/admin/" class="btn btn-outline-light btn-sm me-2">Admin</a>
+            <a href="/api/v1/" class="btn btn-outline-light btn-sm">API</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🎬 Список фильмов</h1>
+
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-md-4 mb-4">
+            <div class="card bg-secondary text-white h-100 shadow">
+                {% if movie.image %}
+                <img src="{{ movie.image }}" class="card-img-top" alt="{{ movie.title }}">
+                {% else %}
+                <img src="{% static 'images/no-image.jpg' %}" class="card-img-top" alt="Нет изображения">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.description|truncatechars:100 }}</p>
+                    <p class="mb-1">⭐ IMDB: {{ movie.imdb }} | 🎯 Кинопоиск: {{ movie.kinopoisk }}</p>
+                    <p><small>📅 Дата выхода: {{ movie.release_date|default:"Не указана" }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center mt-5">
+            <p class="fs-4">Нет фильмов в базе данных 😢</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<a href="desk/">Desktop</a>
+
+<footer class="text-center py-3 bg-secondary mt-5">
+    <p class="mb-0">MediaSite</p>
+</footer>
+
+</body>
+</html>
