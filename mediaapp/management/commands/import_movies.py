@@ -56,7 +56,6 @@ class Command(BaseCommand):
                     "description": description,
                     "image": image,
                     "imdb": imdb_rating,
-                    "kinopoisk": kinopoisk_rating,
                     "release_date": release_date,
                 }
             )
